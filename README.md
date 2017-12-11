@@ -17,7 +17,7 @@ And environment variables inside the docker container too.
 
 ### How to run:
 
-``sh
+``
 docker run -d -p 8080:8080 --rm --name ec2-testing vensder/ec2-testing
 ``
 
@@ -25,12 +25,12 @@ Open [http://localhost:8080/Hi%20there!](http://localhost:8080/Hi%20there!) or a
 
 View logs:
 
-``sh
+``
 docker logs ec2-testing
 ``
 
 Stop container:
 
-``sh
+``
 docker stop ec2-testing
 ``
