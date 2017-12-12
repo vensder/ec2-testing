@@ -6,10 +6,16 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 )
 
-var meta_data_items_map = make(map[string]string)
+var meta_items_struct = struct {
+	sync.RWMutex
+	m map[string]string
+}{m: make(map[string]string)}
+
+//var meta_data_items_map = make(map[string]string)
 
 var meta_data_items = []string{
 	"ami-id",
@@ -32,7 +38,7 @@ func hostname() string {
 }
 
 func getMetaData(meta_data_item string) string {
-	timeout := time.Duration(1 * time.Second)
+	timeout := time.Duration(100 * time.Millisecond)
 	client := http.Client{
 		Timeout: timeout,
 	}
@@ -55,7 +61,9 @@ func getMetaData(meta_data_item string) string {
 }
 
 func putMetaData(meta_data_item string) {
-	meta_data_items_map[meta_data_item] = getMetaData(meta_data_item)
+	meta_items_struct.Lock()
+	meta_items_struct.m[meta_data_item] = getMetaData(meta_data_item)
+	meta_items_struct.Unlock()
 }
 
 func main() {
@@ -66,9 +74,7 @@ func main() {
 
 	fmt.Println("Server starting...")
 	hostname := hostname()
-	fmt.Println("Hostname: " + hostname)
 	env_color := os.Getenv("color")
-	fmt.Println(env_color)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
@@ -76,21 +82,19 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
-		fmt.Println(string(file_content))
 
 		fmt.Fprintf(w, ("<p>URL Path: " + r.URL.Path + "</p>"))
 		fmt.Fprintf(w, ("<p>date.txt: " + string(file_content) + "</p>"))
 		fmt.Fprintf(w, ("<h1 style=\"background-color:" + env_color + ";\">Host: " + hostname + "</h1>"))
 		for _, item := range meta_data_items {
-			fmt.Fprintf(w, ("<h2>" + item + ": " + meta_data_items_map[item] + "</h2>"))
+			meta_items_struct.RLock()
+			fmt.Fprintf(w, ("<h2>" + item + ": " + meta_items_struct.m[item] + "</h2>"))
+			meta_items_struct.RUnlock()
 		}
 
 		for _, e := range os.Environ() {
-			fmt.Println(string(e))
 			fmt.Fprintf(w, ("<p>" + string(e) + "</p>"))
 		}
-
-		fmt.Println(hostname)
 	})
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
