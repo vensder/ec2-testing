@@ -9,6 +9,20 @@ import (
 	"time"
 )
 
+var meta_data_items_map = make(map[string]string)
+
+var meta_data_items = []string{
+	"ami-id",
+	"hostname",
+	"instance-id",
+	"instance-type",
+	"local-hostname",
+	"local-ipv4",
+	"public-ipv4",
+	"public-keys",
+	"security-groups",
+}
+
 func hostname() string {
 	hostname, err := os.Hostname()
 	if err == nil {
@@ -40,23 +54,16 @@ func getMetaData(meta_data_item string) string {
 	return "Status is Not OK for " + meta_data_item
 }
 
+func putMetaData(meta_data_item string) {
+	meta_data_items_map[meta_data_item] = getMetaData(meta_data_item)
+}
+
 func main() {
-	meta_data_items := []string{
-		"ami-id",
-		"hostname",
-		"instance-id",
-		"instance-type",
-		"local-hostname",
-		"local-ipv4",
-		"public-ipv4",
-		"public-keys",
-		"security-groups",
+
+	for _, item := range meta_data_items {
+		go putMetaData(item)
 	}
 
-	meta_data_items_map := make(map[string]string)
-	for _, item := range meta_data_items {
-		meta_data_items_map[item] = getMetaData(item)
-	}
 	fmt.Println("Server starting...")
 	hostname := hostname()
 	fmt.Println("Hostname: " + hostname)
