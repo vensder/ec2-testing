@@ -10,12 +10,7 @@ import (
 	"time"
 )
 
-var meta_items_struct = struct {
-	sync.RWMutex
-	m map[string]string
-}{m: make(map[string]string)}
-
-//var meta_data_items_map = make(map[string]string)
+var timeout = time.Duration(1000 * time.Millisecond)
 
 var meta_data_items = []string{
 	"ami-id",
@@ -29,6 +24,11 @@ var meta_data_items = []string{
 	"security-groups",
 }
 
+var meta_items_struct = struct {
+	sync.RWMutex
+	m map[string]string
+}{m: make(map[string]string)}
+
 func hostname() string {
 	hostname, err := os.Hostname()
 	if err == nil {
@@ -38,7 +38,6 @@ func hostname() string {
 }
 
 func getMetaData(meta_data_item string) string {
-	timeout := time.Duration(100 * time.Millisecond)
 	client := http.Client{
 		Timeout: timeout,
 	}
@@ -61,8 +60,9 @@ func getMetaData(meta_data_item string) string {
 }
 
 func putMetaData(meta_data_item string) {
+	item := getMetaData(meta_data_item)
 	meta_items_struct.Lock()
-	meta_items_struct.m[meta_data_item] = getMetaData(meta_data_item)
+	meta_items_struct.m[meta_data_item] = item
 	meta_items_struct.Unlock()
 }
 
