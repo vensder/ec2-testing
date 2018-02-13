@@ -63,6 +63,7 @@ func main() {
 		"public-ipv4",
 		"public-keys",
 		"security-groups",
+		"services"
 	}
 
 	meta_data_items_map := make(map[string]string)
