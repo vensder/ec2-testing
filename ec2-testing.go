@@ -68,6 +68,7 @@ func main() {
 	meta_data_items_map := make(map[string]string)
 	for _, item := range meta_data_items {
 		meta_data_items_map[item] = getMetaData(item)
+		fmt.Println(meta_data_items_map[item])
 	}
 	fmt.Println("Server starting...")
 	hostname := hostname()
