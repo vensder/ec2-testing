@@ -95,7 +95,7 @@ func main() {
 
 		fmt.Fprintf(w, ("<h3>Environment Variables</h3>" + "<pre><small>"))
 		for _, e := range os.Environ() {
-			fmt.Println(string(e))
+			//fmt.Println(string(e))
 			fmt.Fprintf(w, (string(e) + "</br>"))
 		}
 		fmt.Fprintf(w, ("</pre></small>"))
