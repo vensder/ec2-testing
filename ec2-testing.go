@@ -96,7 +96,7 @@ func main() {
 		fmt.Fprintf(w, ("<pre><small>"))
 		for _, e := range os.Environ() {
 			fmt.Println(string(e))
-			fmt.Fprintf(w, (string(e)))
+			fmt.Fprintf(w, (string(e) + "</br>"))
 		}
 		fmt.Fprintf(w, ("</pre></small>"))
 
