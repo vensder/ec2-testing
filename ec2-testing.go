@@ -95,7 +95,7 @@ func main() {
 
 		for _, e := range os.Environ() {
 			fmt.Println(string(e))
-			fmt.Fprintf(w, ("<p>" + string(e) + "</p>"))
+			fmt.Fprintf(w, ("<p><small>" + string(e) + "</small></p>"))
 		}
 
 		fmt.Println(hostname)
