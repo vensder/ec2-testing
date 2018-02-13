@@ -48,10 +48,6 @@ func getResponceBody(url string) string {
 // 	resp, err := client.Get(start_url + "/")
 // }
 
-func getMetaData(meta_data_item string) string {
-	return getResponceBody("http://169.254.169.254/latest/meta-data/" + meta_data_item + "/")
-}
-
 func main() {
 	meta_data_items := []string{
 		"ami-id",
@@ -69,7 +65,7 @@ func main() {
 
 	meta_data_items_map := make(map[string]string)
 	for _, item := range meta_data_items {
-		meta_data_items_map[item] = getMetaData(item)
+		meta_data_items_map[item] = getResponceBody("http://169.254.169.254/latest/meta-data/" + item + "/")
 		fmt.Println(item + ": " + meta_data_items_map[item])
 	}
 	fmt.Println("Server starting...")
@@ -95,7 +91,6 @@ func main() {
 
 		fmt.Fprintf(w, ("<h3>Environment Variables</h3>" + "<pre><small>"))
 		for _, e := range os.Environ() {
-			//fmt.Println(string(e))
 			fmt.Fprintf(w, (string(e) + "</br>"))
 		}
 		fmt.Fprintf(w, ("</pre></small>"))
