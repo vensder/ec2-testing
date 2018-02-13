@@ -93,10 +93,12 @@ func main() {
 			fmt.Fprintf(w, ("<h2>" + item + ": " + meta_data_items_map[item] + "</h2>"))
 		}
 
+		fmt.Fprintf(w, ("<pre><small>"))
 		for _, e := range os.Environ() {
 			fmt.Println(string(e))
-			fmt.Fprintf(w, ("<p><small>" + string(e) + "</small></p>"))
+			fmt.Fprintf(w, (string(e)))
 		}
+		fmt.Fprintf(w, ("</pre></small>"))
 
 		fmt.Println(hostname)
 	})
