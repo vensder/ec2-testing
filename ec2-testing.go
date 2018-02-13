@@ -64,6 +64,7 @@ func main() {
 		"public-keys",
 		"security-groups",
 		"services",
+		"error-handling-test",
 	}
 
 	meta_data_items_map := make(map[string]string)
