@@ -1,8 +1,8 @@
 # Small Golang Web server in Docker for AWS EC2 testing
 
-[![Build Status](https://travis-ci.org/vensder/ec2-testing.svg?branch=master)](https://travis-ci.org/vensder/ec2-testing)
+<nobr> [![Build Status](https://travis-ci.org/vensder/ec2-testing.svg?branch=master)](https://travis-ci.org/vensder/ec2-testing)
 
-![Go](https://github.com/vensder/ec2-testing/workflows/Go/badge.svg)
+![Go](https://github.com/vensder/ec2-testing/workflows/Go/badge.svg) </nobr>
 
 If you run it on AWS EC2 Environment, Web server show you page with some meta information about current EC2 instance:
 
