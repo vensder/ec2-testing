@@ -1,4 +1,4 @@
-FROM golang:onbuild
+FROM golang:1.14.4-alpine3.12
 ADD . /root/
 WORKDIR /root
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -x ec2-testing.go && chmod +x ec2-testing
