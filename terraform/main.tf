@@ -62,10 +62,13 @@ resource "aws_security_group" "allow_http" {
 }
 
 resource "aws_instance" "amazon-linux" {
-  key_name        = "${aws_key_pair.vensder.key_name}"
-  ami             = "ami-0e9089763828757e1"
-  instance_type   = "t3.nano"
-  security_groups = ["${aws_security_group.allow_ssh.name}", "${aws_security_group.allow_http.name}"]
+  key_name      = "${aws_key_pair.vensder.key_name}"
+  ami           = "ami-0e9089763828757e1"
+  instance_type = "t3.nano"
+  security_groups = [
+    "${aws_security_group.allow_ssh.name}",
+    "${aws_security_group.allow_http.name}"
+  ]
   user_data = <<EOF
     #!/usr/bin/env bash
     sudo yum update -y
