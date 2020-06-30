@@ -4,5 +4,5 @@ go:
   - 1.14
 
 before_install:
-  - go get -v github.com/golang/lint/golint
+  - go get -u golang.org/x/lint/golint
 
