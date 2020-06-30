@@ -14,3 +14,22 @@
 .glide/
 
 ec2-testing
+
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Variables file with secrets
+*.tfvars
+**.tfvars
+
+# auto-generated S3 backend configuration
+backend.tf
+**/backend.tf
