@@ -3,7 +3,7 @@ ADD . /root/
 WORKDIR /root
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -x ec2-testing.go && chmod +x ec2-testing
 
-FROM alpine:latest
+FROM alpine:3.12
 WORKDIR /root
 COPY --from=0 /root/ec2-testing .
 RUN echo "builded date: $(date -u)" > date.txt
