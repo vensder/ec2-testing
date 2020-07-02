@@ -79,3 +79,9 @@ You can use this container for testing of AWS Elastic Beanstalk Blue/Green deplo
 eb init -p docker ec2-testing
 eb create ec2-testing-blue --instance_type t3.nano
 ```
+
+Terminate environment:
+
+```bash
+eb terminate ec2-testing-blue
+```
