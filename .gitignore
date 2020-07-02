@@ -33,3 +33,8 @@ crash.log
 # auto-generated S3 backend configuration
 backend.tf
 **/backend.tf
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

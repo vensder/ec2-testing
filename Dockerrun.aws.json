@@ -2,7 +2,7 @@
     "AWSEBDockerrunVersion": "2",
     "volumes": [
         {
-        "name": "nginx-conf",
+            "name": "nginx-conf",
             "host": {
                 "sourcePath": "/home/ec2-user/nginx"
             }
@@ -14,52 +14,48 @@
             "image": "vensder/ec2-testing",
             "essential": true,
             "memory": 128,
-
             "portMappings": [
                 {
                     "hostPort": 8080,
                     "containerPort": 8080
                 }
             ],
-            "environment" : [
+            "environment": [
                 {
-                    "name" : "env_var",
-                    "value" : "env_value2"
+                    "name": "env_var",
+                    "value": "env_value2"
                 },
-		{
-			"name": "color",
-			"value": "DodgerBlue"
-		},
-		{
-			"name" : "jenkins_build_tag",
-			"value" : "build_tag"
-		}
+                {
+                    "name": "color",
+                    "value": "DodgerBlue"
+                },
+                {
+                    "name": "jenkins_build_tag",
+                    "value": "build_tag"
+                }
             ]
         },
-    	{
-    	    "name": "nginx",
-    	    "image": "nginx",
-    	    "essential": true,
-    	    "memory": 128,
-
-    	    "portMappings": [
-        		{
-        			"hostPort": 80,
-        			"containerPort": 80
-        		}
+        {
+            "name": "nginx",
+            "image": "nginx",
+            "essential": true,
+            "memory": 128,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
             ],
             "links": [
                 "app"
             ],
             "mountPoints": [
-               {
-                "sourceVolume": "nginx-conf",
-                "containerPath": "/etc/nginx/conf.d",
-                "readOnly": true
+                {
+                    "sourceVolume": "nginx-conf",
+                    "containerPath": "/etc/nginx/conf.d",
+                    "readOnly": true
                 }
             ]
-    	 
-    	}
-
+        }
     ]
 }
