@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-set -ex
+set -eufx -o pipefail
 
 if aws s3 ls | grep terraform-state; then
 	echo "s3 bucket present, creating backend config file..."
-	TERRAFORM_BACKEND_S3_BUCKET=$(aws s3 ls | grep -Eo 'terraform-state-[0-9]{12}')
+	_terraform_backend_s3_bucket=$(aws s3 ls | grep -Eo 'terraform-state-[0-9]{12}')
 	cat > backend.tf << EOF
 terraform {
   backend "s3" {
-    bucket = "$TERRAFORM_BACKEND_S3_BUCKET"
+    bucket = "$_terraform_backend_s3_bucket"
     key = "terraform_main.tfstate"
     region = "us-east-1"
   }
