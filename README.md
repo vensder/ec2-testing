@@ -73,4 +73,9 @@ Stop container:
 docker stop ec2-testing
 ```
 
-You can use this container for testing of AWS Elastic Beanstalk Blue/Green deployment (see Dockerrun.aws.json) - just set environment variable "color" in appropriate color for each environment.
+You can use this container for testing of AWS Elastic Beanstalk Blue/Green deployment (see Dockerrun.aws.json) - just set environment variable "color" inappropriate color for each environment. You can create an Elastic Beanstalk application and environment, using Elastic Beanstalk command-line interface:
+
+```bash
+eb init -p docker ec2-testing
+eb create ec2-testing-blue
+```
