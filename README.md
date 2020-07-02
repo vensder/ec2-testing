@@ -84,8 +84,11 @@ eb create ec2-testing-green --instance_type t3.nano --region us-east-1 --envvars
 eb swap ec2-testing-blue --destination_name ec2-testing-green
 ```
 
+![alt text](./img/blue-green.png?raw=true)
+
 Terminate environment:
 
 ```bash
 eb terminate ec2-testing-blue
+eb terminate ec2-testing-green
 ```
