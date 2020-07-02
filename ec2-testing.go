@@ -70,18 +70,30 @@ func main() {
 			fmt.Println(err)
 		}
 		fmt.Println(string(file_content))
-
+		fmt.Fprintf(w, (`
+		<html>
+			<head>
+				<style> 
+					h1 {color:red; font-family: sans-serif; background-color: ` + env_color + ` }
+					h3 {font-family: sans-serif;}
+					p {color:grey; font-family: monospace;} 
+				</style>
+			</head>
+		<body>
+		`))
 		fmt.Fprintf(w, ("<p>URL Path: " + r.URL.Path + "</p>"))
-		fmt.Fprintf(w, ("<p>date.txt: " + string(file_content) + "</p>"))
-		fmt.Fprintf(w, ("<h1 style=\"background-color:" + env_color + ";\">Host: " + hostname + "</h1>"))
+		fmt.Fprintf(w, ("<p>build date: " + string(file_content) + "</p>"))
+		fmt.Fprintf(w, ("<h1>Hostname: " + hostname + "</h1>"))
 		for _, item := range meta_data_items {
-			fmt.Fprintf(w, ("<h2>" + item + ": " + meta_data_items_map[item] + "</h2>"))
+			fmt.Fprintf(w, ("<h3>" + item + ": " + meta_data_items_map[item] + "</h3>"))
 		}
 
 		for _, e := range os.Environ() {
 			fmt.Println(string(e))
 			fmt.Fprintf(w, ("<p>" + string(e) + "</p>"))
 		}
+
+		fmt.Fprintf(w, ("</body></html>"))
 
 		fmt.Println(hostname)
 	})
