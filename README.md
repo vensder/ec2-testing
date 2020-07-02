@@ -1,4 +1,4 @@
-# Simple Golang Web App in Docker for AWS EC2/ECS testing
+# Simple Golang Web App in Docker for AWS EC2/ECS/Elastic Beanstalk testing
 
 ![Go](https://github.com/vensder/ec2-testing/workflows/Go/badge.svg) [![Build Status](https://travis-ci.org/vensder/ec2-testing.svg?branch=master)](https://travis-ci.org/vensder/ec2-testing) ![Docker](https://img.shields.io/docker/build/vensder/ec2-testing)
 
