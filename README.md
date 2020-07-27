@@ -92,3 +92,25 @@ Terminate environment:
 eb terminate ec2-testing-blue
 eb terminate ec2-testing-green
 ```
+
+## Run it in K8s locally
+
+```bash
+cd ./k8s
+kubectl apply -f ec2-test.yml
+kubectl get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+ec2-test-599869688d-b72s4   1/1     Running   0          5m24s
+ec2-test-599869688d-nngrw   1/1     Running   0          5m24s
+ec2-test-599869688d-txttm   1/1     Running   0          5m24s
+ec2-test-599869688d-xhsgq   1/1     Running   0          5m24s
+```
+
+Add `ec2-test.local` to `/etc/hostws`:
+
+```bash
+grep 'ec2-test.local' /etc/hosts
+127.0.0.1 ec2-test.local
+```
+
+Open in a browser <http://ec2-test.local/>
