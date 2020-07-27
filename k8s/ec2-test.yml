@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ec2-test
+  labels:
+    app: ec2-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: ec2-test
+  template:
+    metadata:
+      labels:
+        app: ec2-test
+    spec:
+      containers:
+        - name: ec2-test
+          image: vensder/ec2-testing
+          ports:
+            - containerPort: 8080
+              name: ec2-test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ec2-test
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: ec2-test
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ec2-test
+spec:
+  rules:
+    - host: ec2-test.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ec2-test
+              servicePort: 8080
+
