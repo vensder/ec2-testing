@@ -106,7 +106,7 @@ ec2-test-599869688d-txttm   1/1     Running   0          5m24s
 ec2-test-599869688d-xhsgq   1/1     Running   0          5m24s
 ```
 
-Add `ec2-test.local` to `/etc/hostws`:
+Add `ec2-test.local` to `/etc/hosts`:
 
 ```bash
 grep 'ec2-test.local' /etc/hosts
